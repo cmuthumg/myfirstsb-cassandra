@@ -48,6 +48,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>sb-cassandra-k8s</finalName>
 	</build>
 
 </project>

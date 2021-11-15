@@ -1,0 +1,125 @@
+-- Reference
+
+docker hub :
+	cmuthumg
+	K@viyasri02
+
+
+https://github.com/IBM/Scalable-Cassandra-deployment-on-Kubernetes
+
+https://github.com/bitnami/charts/blob/master/bitnami/cassandra/templates/statefulset.yaml
+
+https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
+
+https://tanzu.vmware.com/developer/blog/save-your-stack-build-cloud-native-apps-with-spring-kubernetes-and-cassandra/
+
+===
+
+https://www.youtube.com/watch?v=BnknNTN8icw
+
+https://www.youtube.com/watch?v=VAmntTPebKE
+
+-- commands
+
+echo -n 'cassandra' | base64
+(or)
+[Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('cassandra'))
+
+kubectl create -f cassandra-service.yaml
+
+kubectl get svc
+
+kubectl create -f local-volume-1.yaml
+
+kubectl get pvc 
+
+kubectl create -f cassandra-statefulset.yaml
+
+kubectl get statefulsets
+
+kubectl get pods
+
+kubectl exec -it cassandra-0 /bin/bash
+
+kubectl exec -ti cassandra-0 -- nodetool status
+
+
+kubectl exec -it cassandra-0 cqlsh 
+
+kubectl exec  -i -t -c cassandra cassandra-0 -- /opt/cassandra/bin/cqlsh -u cassandra -p cassandra
+
+kubectl get storageclass
+
+kubectl get deployments --all-namespaces
+
+kubectl port-forward sb-cassandra-k8s-5c4c56f66b-s9sw5 --address 0.0.0.0 8080:8080
+
+--Clean up
+
+kubectl delete statefulsets cassandra
+
+kubectl delete svc cassandra
+
+
+
+
+------------------Docker 
+
+
+refere : {
+	https://medium.com/edureka/docker-commands-29f7551498a8
+}
+
+docker login
+
+docker build -t <image-name> path
+
+	example : PS C:\kube-tuto\sb-docker-k8s\workspace\basic-sb-k8s> 
+	
+			docker build -t basic-sb-k8s .
+
+
+docker images
+
+
+docker tag sb-cassandra-k8s cmuthumg/sb-cassandra-k8s:latest
+
+docker push cmuthumg/sb-cassandra-k8s:latest
+
+docker rmi <image-name>
+	example : docker rmi cmuthumg/basic-sb-k8s basic-sb-k8s 
+
+-- run
+
+docker run -p 8080:8080 cmuthumg/basic-sb-k8s
+	log :
+		Unable to find image 'cmuthumg/basic-sb-k8s:latest' locally
+		latest: Pulling from cmuthumg/basic-sb-k8s
+		Digest: sha256:04a8179014ca26b4a85f3fa2525b99650cb612d64006fbd848b6b900fafe045f
+		Status: Downloaded newer image for cmuthumg/basic-sb-k8s:latest
+
+-- pull
+
+
+
+--
+http://localhost:8080/basic/greeting
+
+
+
+
+=======github======
+
+	cmuthumg
+	K@viyasri02
+
+echo "# hello" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/cmuthumg/basic-sp-k8s.git
+git push -u origin master
+
+
+new way to push in github
+https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token

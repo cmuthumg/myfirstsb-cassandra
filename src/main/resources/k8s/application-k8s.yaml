@@ -1,0 +1,38 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sb-cassandra-k8s
+  labels:
+    name: sb-cassandra-k8s
+spec:
+  ports:
+    - nodePort: 30163 
+      port: 8080      
+      targetPort: 8080  
+      protocol: TCP
+  selector:           
+    app: sb-cassandra-k8s
+  type: NodePort       
+
+---
+apiVersion: apps/v1 
+kind: Deployment    
+metadata:              
+  name: sb-cassandra-k8s
+spec:                
+  selector:         
+    matchLabels:
+      app: sb-cassandra-k8s
+  replicas: 1  
+  template:
+    metadata:
+      labels:        
+        app: sb-cassandra-k8s
+    spec:
+      containers:
+        - name: sb-cassandra-k8s
+          image: cmuthumg/sb-cassandra-k8s:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080  
+        
